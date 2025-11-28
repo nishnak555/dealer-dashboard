@@ -1,0 +1,76 @@
+/* ------------------------------
+   🌐 Global Base Styles (Tailwind Safe)
+--------------------------------- */
+
+:root {
+  --font-main: system-ui, -apple-system, "Inter", "Segoe UI", Roboto, Arial, sans-serif;
+
+  /* Optional Theme Colors */
+  --bg-light: #ffffff;
+  --bg-dark: #0f172a;
+  --text-dark: #1e293b;
+  --text-light: #f8fafc;
+}
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body Base */
+body {
+  font-family: var(--font-main);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-light);
+  color: var(--text-dark);
+}
+
+/* Remove default anchor styles */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Images should not stretch weirdly */
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* Inputs and buttons inherit font */
+input, button, textarea, select {
+  font-family: inherit;
+  outline: none;
+}
+
+/* Buttons should be neutral (Tailwind handles design) */
+button {
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+/* Remove default list style */
+ul, ol {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Optional: modern scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #cbd5e1;
+  border-radius: 9999px;
+}
