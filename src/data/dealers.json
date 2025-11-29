@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "dealerName": "Dealer 1",
+    "address": "Street 5, City 2",
+    "email": "dealer1@example.com",
+    "phone": "9876543100",
+    "startTime": "09:00",
+    "startPeriod": "AM",
+    "endTime": "06:00",
+    "endPeriod": "PM",
+    "hours": "09:00 AM - 06:00 PM"
+  },
+  {
+    "id": 2,
+    "dealerName": "Dealer 2",
+    "address": "Street 6, City 3",
+    "email": "dealer2@example.com",
+    "phone": "9876543101",
+    "startTime": "09:00",
+    "startPeriod": "AM",
+    "endTime": "06:00",
+    "endPeriod": "PM",
+    "hours": "09:00 AM - 06:00 PM"
+  }
+]

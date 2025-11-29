@@ -5,33 +5,27 @@ import {
   Dashboard as DashboardIcon,
 } from "@mui/icons-material";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import { useNavigate } from "react-router-dom";
 import logo from "../assets/icons/logo.png";
 import type { MenuItem, SidebarProps } from "../interfaces/sidebar.interface";
 
 const menuItems: MenuItem[] = [
-  { label: "Profile", icon: <UserIcon fontSize="small" /> },
+  { label: "Profile", icon: <UserIcon fontSize="small" />, path: "/profile" },
+
   {
     label: "Dealer Management",
     icon: <UserIcon fontSize="small" />,
     type: "select",
-    options: ["Create Dealer", "View Dealer"],
-  },
-  {
-    label: "Template",
-    icon: <DashboardIcon fontSize="small" />,
-    type: "select",
-    options: ["Option A", "Option B"],
-  },
-  {
-    label: "Document",
-    icon: <DashboardIcon fontSize="small" />,
-    type: "select",
-    options: ["Option A", "Option B"],
+    options: [
+      { label: "Create Dealer", path: "/create-dealer" },
+      { label: "View Dealer", path: "/view-dealer" },
+    ],
   },
 ];
 
 const Sidebar: React.FC<SidebarProps> = ({ isOpen, isMobile, onItemClick }) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const navigate = useNavigate();
 
   const toggleDropdown = (index: number) =>
     setOpenIndex(openIndex === index ? null : index);
@@ -39,8 +33,8 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, isMobile, onItemClick }) => {
   return (
     <div
       className={`
-        h-screen bg-[#111827] text-slate-200 
-        transition-all duration-300 overflow-hidden relative
+        h-screen bg-[#111827] text-slate-200 transition-all duration-300 
+        overflow-hidden relative
         ${isOpen ? "w-[265px] px-6 py-6" : "w-0 p-0"}
         ${isMobile ? "fixed top-0 left-0 z-999" : "relative"}
       `}
@@ -72,7 +66,13 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, isMobile, onItemClick }) => {
           </p>
 
           <div className="mb-6">
-            <div className="flex items-center gap-3 p-2.5 cursor-pointer rounded-md hover:bg-[#1F2937] transition">
+            <div
+              className="flex items-center gap-3 p-2.5 cursor-pointer rounded-md hover:bg-[#1F2937] transition"
+              onClick={() => {
+                navigate("/");
+                onItemClick();
+              }}
+            >
               <DashboardIcon
                 fontSize="small"
                 className="text-slate-300 w-[18px] h-[18px]"
@@ -92,12 +92,12 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, isMobile, onItemClick }) => {
           <li key={index}>
             <div
               onClick={() => {
+                if (!item.type && item.path) navigate(item.path);
                 toggleDropdown(index);
                 onItemClick();
               }}
               className={`
-                flex justify-between items-center 
-                px-3 py-2 rounded-md cursor-pointer 
+                flex justify-between items-center px-3 py-2 rounded-md cursor-pointer 
                 hover:bg-[#374151] transition
                 ${openIndex === index ? "bg-[#374151]" : ""}
               `}
@@ -119,20 +119,23 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, isMobile, onItemClick }) => {
                 />
               )}
             </div>
+
             {item.type === "select" && (
               <ul
-                className={`
-                  ml-10 overflow-hidden transition-all duration-300 
-                  ${openIndex === index ? "max-h-40" : "max-h-0"}
-                `}
+                className={`ml-10 overflow-hidden transition-all duration-300 ${
+                  openIndex === index ? "max-h-40" : "max-h-0"
+                }`}
               >
                 {item.options?.map((opt, i) => (
                   <li
                     key={i}
-                    onClick={onItemClick}
+                    onClick={() => {
+                      navigate(opt.path);
+                      onItemClick();
+                    }}
                     className="text-[#CBD5E1] text-[14px] py-1.5 cursor-pointer hover:text-sky-400 leading-[1.8]"
                   >
-                    {opt}
+                    {opt.label}
                   </li>
                 ))}
               </ul>

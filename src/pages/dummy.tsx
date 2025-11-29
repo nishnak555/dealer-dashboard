@@ -1,11 +1,13 @@
+import DealerForm from "../components/dealerForm";
 
 const dummy = () => {
+
+
   return (
     <div>
-      dummy element
-      
+   <DealerForm/>
     </div>
-  )
+  );
 }
 
 export default dummy

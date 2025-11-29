@@ -1,0 +1,8 @@
+feature list
+sidebar ,header
+dealer form 
+submissioncard
+modal 
+table
+edit form
+detail page
