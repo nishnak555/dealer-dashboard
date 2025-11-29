@@ -4,7 +4,7 @@ import Header from "../components/Header";
 import { useState, useEffect } from "react";
 
 const Layout: React.FC = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 992);
 
   useEffect(() => {
