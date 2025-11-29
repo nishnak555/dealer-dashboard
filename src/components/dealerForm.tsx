@@ -4,8 +4,10 @@ import { DealerSchema } from "../validation/dealer.schema";
 import type { DealerFormValues } from "../interfaces/dealer.interface";
 import { createDealer } from "../services/dealer.service";
 import Button from "../components/common/Button";
+import { useNavigate } from "react-router";
 
 const DealerForm: React.FC = () => {
+ const navigate = useNavigate()
   const formik = useFormik<DealerFormValues>({
     initialValues: {
       dealerName: "",
@@ -35,6 +37,7 @@ const DealerForm: React.FC = () => {
       await createDealer(payload);
       alert("Dealer Created Successfully!");
       formik.resetForm();
+     navigate("/view-dealer")
     },
   });
 
