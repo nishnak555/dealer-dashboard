@@ -10,7 +10,6 @@ import logo from "../assets/icons/logo.png";
 import type { MenuItem, SidebarProps } from "../interfaces/sidebar.interface";
 
 const menuItems: MenuItem[] = [
-  { label: "Profile", icon: <UserIcon fontSize="small" />, path: "/profile" },
 
   {
     label: "Dealer Management",
@@ -18,7 +17,7 @@ const menuItems: MenuItem[] = [
     type: "select",
     options: [
       { label: "Create Dealer", path: "/create-dealer" },
-      { label: "View Dealer", path: "/view-dealer" },
+      { label: "View Dealer", path: "/" },
     ],
   },
 ];

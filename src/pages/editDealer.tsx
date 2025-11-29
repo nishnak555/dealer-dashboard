@@ -60,7 +60,7 @@ const EditDealer = () => {
       updateDealer(updated);
 
       alert("Dealer updated successfully!");
-      navigate("/view-dealer");
+      navigate("/");
     },
   });
 

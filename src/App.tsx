@@ -17,7 +17,7 @@ function App() {
          Component: CreateDealerPage,
        },
        {
-         path: "view-dealer",
+         path: "",
          Component: DealerListPage,
        },
        {
