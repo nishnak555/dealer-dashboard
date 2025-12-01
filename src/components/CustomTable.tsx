@@ -1,15 +1,14 @@
 import {
-  DeleteOutline,
   EditOutlined,
-  VisibilityOutlined,
   KeyboardArrowLeft,
   KeyboardArrowRight,
 } from "@mui/icons-material";
 import { useState } from "react";
-
+import DeleteIcon from "@mui/icons-material/Delete";
 import CustomModal from "../components/CustomModal";
 import { modalMap } from "../components/modalMap";
-
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import EditIcon from "@mui/icons-material/Edit";
 export interface Column<T> {
   accessor: keyof T | string;
   header: string;
@@ -112,16 +111,16 @@ const CustomTable = <T extends { id?: number } & Record<string, any>>({
 
                       <td className="px-4 py-2 text-right">
                         <div className="flex justify-end gap-3">
-                          <VisibilityOutlined
+                          <VisibilityIcon
                             className="cursor-pointer text-blue-600"
                             onClick={() => openModal("view", row)}
                           />
-                          <EditOutlined
-                            className="cursor-pointer text-orange-600"
+                          <EditIcon
+                            className="cursor-pointer text-orange-400"
                             onClick={() => openModal("edit", row)}
                           />
-                          <DeleteOutline
-                            className="cursor-pointer text-red-600"
+                          <DeleteIcon
+                            className="cursor-pointer text-red-400"
                             onClick={() => openModal("delete", row)}
                           />
                         </div>
