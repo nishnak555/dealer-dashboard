@@ -1,26 +1,22 @@
 import { useEffect, useState } from "react";
 import { getDealers, deleteDealer } from "../services/dealer.service";
 import CustomTable, { type Column } from "../components/CustomTable";
-import DeleteModal from "../components/DeleteModal";
 import type { DealerFormValues } from "../interfaces/dealer.interface";
 
 const DealerListPage = () => {
   const [allData, setAllData] = useState<DealerFormValues[]>([]);
   const [filteredData, setFilteredData] = useState<DealerFormValues[]>([]);
-
   const [search, setSearch] = useState("");
 
+  // Pagination
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
 
-  const [deleteOpen, setDeleteOpen] = useState(false);
-  const [selectedId, setSelectedId] = useState<number | null>(null);
-
-  // Load dealers from storage
+  // Load dealers
   const loadDealers = () => {
     const dealers = getDealers();
     setAllData(dealers);
-    setFilteredData(dealers); // initial show all
+    setFilteredData(dealers);
   };
 
   useEffect(() => {
@@ -30,7 +26,6 @@ const DealerListPage = () => {
   // Search filter
   useEffect(() => {
     const lower = search.toLowerCase();
-
     const result = allData.filter(
       (dealer) =>
         dealer.dealerName.toLowerCase().includes(lower) ||
@@ -38,44 +33,24 @@ const DealerListPage = () => {
     );
 
     setFilteredData(result);
-    setPage(1); // reset to first page on search
+    setPage(1);
   }, [search, allData]);
 
-  // Paginated data
+  // Pagination logic
   const paginatedData = filteredData.slice(
     (page - 1) * pageSize,
     page * pageSize
   );
 
-  // Delete click handler
+  // Delete Handler
   const handleDelete = (id: number) => {
-    setSelectedId(id);
-    setDeleteOpen(true);
+    deleteDealer(id);
+    loadDealers(); // refresh table
   };
 
-  // Confirm delete
-  const confirmDelete = () => {
-    if (selectedId !== null) {
-      const updated = deleteDealer(selectedId);
-
-      setAllData(updated); // sync all data
-
-      // apply filter again after delete
-      const filtered = updated.filter(
-        (dealer) =>
-          dealer.dealerName.toLowerCase().includes(search.toLowerCase()) ||
-          dealer.address.toLowerCase().includes(search.toLowerCase())
-      );
-
-      setFilteredData(filtered);
-
-      // adjust pagination if page becomes empty
-      if ((page - 1) * pageSize >= filtered.length && page > 1) {
-        setPage(page - 1);
-      }
-    }
-
-    setDeleteOpen(false);
+  // Update Handler (called after edit)
+  const handleUpdate = () => {
+    loadDealers(); // refresh table after edit
   };
 
   const columns: Column<DealerFormValues>[] = [
@@ -107,16 +82,12 @@ const DealerListPage = () => {
         page={page}
         pageSize={pageSize}
         onPageChange={setPage}
-        onPageSizeChange={setPageSize}
+        onPageSizeChange={(size) => {
+          setPageSize(size);
+          setPage(1);
+        }}
         onDelete={handleDelete}
-      />
-
-      <DeleteModal
-        isOpen={deleteOpen}
-        onClose={() => setDeleteOpen(false)}
-        onConfirm={confirmDelete}
-        title="Delete Dealer?"
-        message="Are you sure you want to delete this dealer permanently?"
+        onUpdate={handleUpdate} // ⭐ Refresh after edit
       />
     </div>
   );
