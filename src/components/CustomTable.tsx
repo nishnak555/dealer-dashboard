@@ -30,7 +30,7 @@ export interface CustomTableProps<T> {
   onPageSizeChange: (size: number) => void;
 
   onDelete?: (id: number) => void;
-  onUpdate?: () => void; // ⭐ added
+  onUpdate?: () => void; 
 }
 
 const CustomTable = <T extends { id?: number } & Record<string, any>>({
@@ -69,7 +69,6 @@ const CustomTable = <T extends { id?: number } & Record<string, any>>({
         <div className="overflow-x-auto w-full">
           <div className="max-h-60 overflow-y-auto">
             <table className="w-full min-w-[1100px] text-left border-collapse">
-              {/* HEADER */}
               <thead className="sticky top-0 bg-[#F8FAFC] z-20">
                 <tr>
                   <th className="px-4 py-2 w-4"></th>
@@ -92,7 +91,6 @@ const CustomTable = <T extends { id?: number } & Record<string, any>>({
                 </tr>
               </thead>
 
-              {/* BODY (normal table body, NOT block) */}
               <tbody>
                 {data.map((row, rowIdx) => {
                   const serial = (page - 1) * pageSize + (rowIdx + 1);
@@ -136,7 +134,6 @@ const CustomTable = <T extends { id?: number } & Record<string, any>>({
           </div>
         </div>
 
-        {/* Pagination stays same */}
         <div className="flex justify-end gap-6 mt-4 text-sm">
           <div className="flex items-center gap-2">
             <span>Rows per page:</span>
@@ -190,11 +187,11 @@ const CustomTable = <T extends { id?: number } & Record<string, any>>({
               if (modalType === "delete" && yes)
                 selectedRow?.id && onDelete?.(selectedRow.id);
 
-              onUpdate?.(); // ⭐ refresh
+              onUpdate?.(); 
               closeModal();
             }}
             onUpdate={() => {
-              onUpdate?.(); // ⭐ refresh after edit
+              onUpdate?.();
               closeModal();
             }}
           />

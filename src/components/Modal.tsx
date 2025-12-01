@@ -19,18 +19,15 @@ const Modal: React.FC<ModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-999 flex items-center justify-center">
-      {/* BACKDROP (not full black) */}
       <div
         className="absolute inset-0 bg-black/40 backdrop-blur-sm"
         onClick={onClose}
       />
 
-      {/* MODAL CONTAINER */}
       <div
         className={`relative bg-white rounded-lg shadow-lg p-6 w-full ${width} mx-4 z-1000`}
         onClick={(e) => e.stopPropagation()}
       >
-        {/* HEADER */}
         <div className="flex justify-between items-center mb-4">
           {title && (
             <h2 className="text-lg font-semibold text-gray-800">{title}</h2>
@@ -43,7 +40,6 @@ const Modal: React.FC<ModalProps> = ({
           </button>
         </div>
 
-        {/* CONTENT */}
         {children}
       </div>
     </div>

@@ -9,12 +9,12 @@ export interface Column<T> {
 
 export interface ServerTableProps<T> {
   columns: Column<T>[];
-  data: T[]; // API rows
-  totalCount: number; // API total rows count
+  data: T[];
+  totalCount: number; 
   loading?: boolean;
 
-  page: number; // current page
-  pageSize: number; // current page size
+  page: number; 
+  pageSize: number; 
   pageSizeOptions?: number[];
 
   onPageChange: (page: number) => void;

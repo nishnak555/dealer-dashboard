@@ -87,7 +87,7 @@ const DealerListPage = () => {
           setPage(1);
         }}
         onDelete={handleDelete}
-        onUpdate={handleUpdate} // ⭐ Refresh after edit
+        onUpdate={handleUpdate} 
       />
     </div>
   );

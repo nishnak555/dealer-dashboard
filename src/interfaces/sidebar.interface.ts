@@ -8,9 +8,9 @@ export interface SubMenuItem {
 export interface MenuItem {
   label: string;
   icon: JSX.Element;
-  path?: string; // For normal menu items
+  path?: string; 
   type?: "select";
-  options?: SubMenuItem[]; // For dropdown items
+  options?: SubMenuItem[]; 
 }
 
 export interface SidebarProps {
