@@ -1,5 +1,4 @@
 import {
-  EditOutlined,
   KeyboardArrowLeft,
   KeyboardArrowRight,
 } from "@mui/icons-material";
